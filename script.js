@@ -1,23 +1,23 @@
-var detailsForm = document.querySelector('#destination_details_form');
+const detailsForm = document.querySelector('#destination_details_form');
 
 detailsForm.addEventListener('submit', handleFormSubmit);
 
 function handleFormSubmit(event) {
     event.preventDefault();
 
-    var destName = event.target.elements["name"].value;
-    var destLocation = event.target.elements["location"].value;
-    var destPhoto = event.target.elements["photo"].value;
-    var destDesc = event.target.elements["description"].value;
+    const destName = event.target.elements["name"].value;
+    const destLocation = event.target.elements["location"].value;
+    const destPhoto = event.target.elements["photo"].value;
+    const destDesc = event.target.elements["description"].value;
 
-    for (var i = 0; i < detailsForm.elements.length; i++) {
+    for (let i = 0; i < detailsForm.elements.length; i++) {
         detailsForm.elements[i].value = "";
     }
     // create card here
 
-    var destCard = createDestinationCard(destName, destLocation, destPhoto, destDesc);
+    const destCard = createDestinationCard(destName, destLocation, destPhoto, destDesc);
 
-    var wishListContainer = document.getElementById('destination_container');
+    const wishListContainer = document.getElementById('destination_container');
 
     if (wishListContainer.children.length === 0) {
         document.getElementById('title').innerHTML = "My Wish List"
@@ -29,13 +29,13 @@ function handleFormSubmit(event) {
 
 
 function createDestinationCard(name, location, photoURL, description) {
-    var card = document.createElement('div');
+    const card = document.createElement('div');
     card.className = 'card';
 
-    var img = document.createElement('img');
+    const img = document.createElement('img');
     img.setAttribute('alt', name)
 
-    var constantPhotoUrl = "./images/signpost.jpg";
+    const constantPhotoUrl = "./images/signpost.jpg";
 
     if (photoURL.length === 0) {
         img.setAttribute('src', constantPhotoUrl)
@@ -46,29 +46,29 @@ function createDestinationCard(name, location, photoURL, description) {
 
     card.appendChild(img);
 
-    var cardBody = document.createElement('div');
+    const cardBody = document.createElement('div');
     cardBody.className = 'card-body';
 
-    var cardTitle = document.createElement('h3');
+    const cardTitle = document.createElement('h3');
     cardTitle.innerText = name;
     cardBody.appendChild(cardTitle);
 
-    var cardSubtitle = document.createElement('h4');
+    const cardSubtitle = document.createElement('h4');
     cardSubtitle.innerText = location;
     cardBody.appendChild(cardSubtitle);
 
     if (description.length !== 0) {
-        var cardText = document.createElement('p');
+        const cardText = document.createElement('p');
         cardText.className = 'card-text';
         cardText.innerText = description;
         cardBody.appendChild(cardText);
     }
 
-    var cardDeleteBtn = document.createElement('button');
+    const cardDeleteBtn = document.createElement('button');
     cardDeleteBtn.innerText = 'Remove';
 
     cardDeleteBtn.addEventListener('click', removeDestination);
-    cardBody.appendChild(cardDeleteBtn);
+    card.appendChild(cardDeleteBtn);
 
     card.appendChild(cardBody);
 
@@ -76,6 +76,6 @@ function createDestinationCard(name, location, photoURL, description) {
 }
 
 function removeDestination(event) {
-    var card = event.target.parentElement;
+    const card = event.target.parentElement;
     card.remove();
 }
